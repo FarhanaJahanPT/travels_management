@@ -1,0 +1,136 @@
+<odoo>
+    <data>
+        <template id="travel_management_snippet_img" name="Travels Snippet">
+            <section class="row align-items-center">
+                <div class="container">
+                         <div style="height:20px">
+                    </div>
+                         <style>
+                             form.o_mark_required{
+                              border: 1px solid grey;
+                              width:30%;
+                              padding-right: 50px;
+                            }
+                                                         span.s_website_form_label_content{
+                                                           padding-left: 150px;
+                            }
+                         </style>
+                         <div class="back_button" align="left">
+                                <a t-attf-href="/"
+                                   name="create">Back</a>
+
+                         </div>
+
+
+                          <center>
+                             <div class="row">
+
+                   <img class="card-img-top" t-attf-src="/web/image/booking.booking/{{booking.id}}/image" alt="Card Image Cap"/>
+                    </div>
+                         </center>
+
+                    <h2>
+                        <center>
+                            <b><t t-esc="booking.booking_reference"/></b>
+                            <br/>
+                        </center>
+                    </h2>
+                         <div style="height:20px">
+                    </div>
+                        <center>
+
+                          <form align="center" id="travel_booking" action="/travel/booking/new" method="post" enctype="multipart/form-data" class="o_mark_required" data-mark="*" data-model_name="" data-success-page="">
+
+                            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                           <div class="s_website_form_rows row s_col_no_bgcolor">
+                               <div class="form-group col-12 s_website_form_field s_website_form_required" data-type="char" data-name="Field">
+                                   <div class="row s_col_no_resize s_col_no_bgcolor">
+
+                            <div align="left">
+                                <span class="s_website_form_label_content"><b>Name  :</b></span>
+                                       <span class="form-control"><t t-esc="booking.customer_id.name"/></span>
+                                   </div>
+                               </div>
+                           </div>
+                           </div>
+                              <div style="height:20px">
+                    </div>
+                              <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                           <div class="s_website_form_rows row s_col_no_bgcolor">
+                               <div class="form-group col-12 s_website_form_field s_website_form_required" data-type="char" data-name="Field">
+                                   <div class="row s_col_no_resize s_col_no_bgcolor">
+                            <div align="left">
+                                <span class="s_website_form_label_content"><b>Travel Date  :</b></span>
+                                       <span class="form-control"><t t-esc="booking.travel_date"/></span>
+                                   </div>
+                                   </div>
+                               </div>
+                           </div>
+                              <div style="height:20px">
+                    </div>
+                               <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                           <div class="s_website_form_rows row s_col_no_bgcolor">
+                               <div class="form-group col-12 s_website_form_field s_website_form_required" data-type="char" data-name="Field">
+                                   <div class="row s_col_no_resize s_col_no_bgcolor">
+                            <div align="left">
+                                <span class="s_website_form_label_content"><b>Source Location  :</b></span>
+                                       <span class="form-control"><t t-esc="booking.source_location_id.address"/></span>
+                            </div>
+                                   </div>
+                               </div>
+                           </div>
+                              <div style="height:20px">
+                    </div>
+                               <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                           <div class="s_website_form_rows row s_col_no_bgcolor">
+                               <div class="form-group col-12 s_website_form_field s_website_form_required" data-type="char" data-name="Field">
+                                   <div class="row s_col_no_resize s_col_no_bgcolor">
+                            <div align="left">
+                                <span class="s_website_form_label_content"><b>Destination Location  :</b></span>
+                                       <span class="form-control"><t t-esc="booking.destination_location_id.address"/></span>
+                            </div>
+                                   </div>
+                               </div>
+                           </div>
+                              <div style="height:20px">
+                    </div>
+                               <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                           <div class="s_website_form_rows row s_col_no_bgcolor">
+                               <div class="form-group col-12 s_website_form_field s_website_form_required" data-type="char" data-name="Field">
+                                   <div class="row s_col_no_resize s_col_no_bgcolor">
+                            <div align="left">
+                                <span class="s_website_form_label_content"><b>Booking Date  :</b></span>
+                                       <span class="form-control"><t t-esc="booking.booking_date"/></span>
+                            </div>
+                                   </div>
+                               </div>
+                           </div>
+                              <div style="height:20px">
+                    </div>
+                               <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                           <div class="s_website_form_rows row s_col_no_bgcolor">
+                               <div class="form-group col-12 s_website_form_field s_website_form_required" data-type="char" data-name="Field">
+                                   <div class="row s_col_no_resize s_col_no_bgcolor">
+                            <div align="left">
+                                <span class="s_website_form_label_content"><b>Service  :</b></span>
+                                       <span class="form-control"><t t-esc="booking.service_id.name"/></span>
+                            </div>
+                                   </div>
+                               </div>
+                           </div>
+                          </form>
+                         </center>
+                </div>
+            </section>
+        </template>
+    </data>
+
+    <template id="external_snippets" inherit_id="website.snippets" priority="7">
+   <xpath expr="//div[@id='snippet_feature']//t[@t-snippet][last()]" position="after">
+       <t t-snippet="travel_management.latest_booking_snippet"
+          t-thumbnail="/travel_management/static/src/img/snippets/tour12.jpg" />
+
+   </xpath>
+</template>
+
+</odoo>

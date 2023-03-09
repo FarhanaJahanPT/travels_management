@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates id="template" xml:space="preserve">
+    <t t-name="travel_management.booking_template">
+    <div class="container" >
+        <section class="s_carousel_wrapper" data-vxml="001">
+            <div t-attf-id="myCarousel{{uniq}}"
+                 class="s_carousel s_carousel_default carousel slide"
+                 data-bs-interval="10000">
+                <div style="height:40px">
+                    </div>
+                <b>
+                    <h3>Travels Management</h3>
+                </b>
+                <br/>
+                <div id="slideshow sample" class="carousel slide"
+                     data-bs-ride="carousel" data-bs-interval="5000"
+                     style="margin:70px;">
+                    <div class="carousel-inner">
+
+                        <t t-foreach="result" t-as="booking">
+
+
+                            <div t-attf-class="carousel-item #{booking.set_active ? 'active' :''}">
+                                <div class="row">
+                                    <t t-foreach="booking" t-as="res">
+                                        <div class="card"
+                                             style="width: 15.25rem;">
+                                            <a t-attr-href="/travel/booking/new?booking_id=#{res[1]}" method="post" enctype="multipart/form-data" class="o_mark_required">
+                            <img class="card-img-top"
+                                 t-attf-src="/web/image/booking.booking/{{res[1]}}/image"
+                                 alt="Card image cap"/>
+                                            <div class="card-body">
+                                                <form action="/travel/booking/new"
+                                                      method="post"
+                                                      enctype="multipart/form-data"
+                                                      class="o_mark_required">
+                                                <input type="hidden"
+                                                       name="booking"
+                                                       t-att-value="res[1]"/>
+                                                    <center><h4 class="card-title">
+                                                    <t t-esc="res[0]"/>
+                                                </h4></center>
+                                                </form>
+
+                                            </div>
+                                            </a>
+                                        </div>
+                                    </t>
+                                </div>
+                            </div>
+                        </t>
+                    </div>
+                </div>
+                <center>
+                <a class="carousel-control-prev o_not_editable"
+                   contenteditable="false"
+                   t-attr-href="#myCarousel{{uniq}}" data-bs-slide="prev"
+                   role="img" aria-label="Previous"
+                   title="Previous" align="bottom">
+                        <span class="carousel-control-prev-icon"/>
+                    <span class="visually-hidden">Previous</span>
+                </a>
+
+
+                <a class="carousel-control-next o_not_editable"
+                   contenteditable="false"
+                   t-attr-href="#myCarousel{{uniq}}" data-bs-slide="next"
+                   role="img" aria-label="Next" title="Next" style="margin:194px;" align="bottom" >
+                    <span class="carousel-control-next-icon"/>
+
+
+                    <span class="visually-hidden">Next</span>
+                </a>
+                </center>
+            </div>
+
+        </section>
+    </div>
+    </t>
+
+
+</templates>

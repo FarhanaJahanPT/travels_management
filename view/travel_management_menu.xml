@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <menuitem id="travel_management" name="Travel Management"/>
+        <menuitem id="travel_management_menu" name="Booking" parent="travel_management"/>
+        <menuitem id="travel_management_menu_action" action="travel_management_action" parent="travel_management_menu" name="Booking"/>
+
+        <menuitem id="travel_management_tour_package" name="Tour Package" parent="travel_management" sequence="10"/>
+        <menuitem id="travel_management_tour_package_action" action="tour_package_action" parent="travel_management_tour_package" name="Tour Package"/>
+
+        <menuitem id="travel_management_location" name="Configuration" parent="travel_management" sequence="30"/>
+        <menuitem id="travel_management_menu_conf_action" action="location_properties" parent="travel_management_location" name="Location"/>
+        <menuitem id="travel_management_menu_service_action" action="service_properties" parent="travel_management_location" name="Service"/>
+        <menuitem id="travel_management_menu_vehicle_action" action="vehicle_properties" parent="travel_management_location" name="Vehicles" />
+        <menuitem id="travel_management_menu_facilities_action" action="facilities_properties" parent="travel_management_location" name="Facilities" />
+
+        <menuitem id="travel_management_report" name="Reporting" parent="travel_management" sequence="20"/>
+        <menuitem id="travel_management_reporting_action" action="travel_reporting_action" parent="travel_management_report" name="Travels Management Report"/>
+
+
+
+
+    </data>
+</odoo>

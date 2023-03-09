@@ -1,0 +1,15 @@
+<odoo>
+    <record id="estimation_properties_view_tree" model="ir.ui.view">
+        <field name="name">estimation.estimation.tree</field>
+        <field name="model">estimation.estimation</field>
+        <field name="arch" type="xml">
+            <tree string="Document Type" >
+                <field name="service" />
+                <field name="quantity" />
+                <field name="amount" />
+                <field name="subtotal" sum="total_subtotal"/>
+
+            </tree>
+        </field>
+    </record>
+</odoo>

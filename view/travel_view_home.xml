@@ -1,0 +1,68 @@
+<odoo>
+    <template id="portal_my_home_travels" name="Show Travels Booking" customize_show="True"
+              inherit_id="portal.portal_my_home" priority="50">
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+            <t t-call="portal.portal_docs_entry">
+                <t t-set="title">Travels Booking</t>
+                <t t-set="url" t-value="'/my/travels'"/>
+
+                <t t-set="placeholder_count" t-value="'travel_count'"/>
+            </t>
+        </xpath>
+    </template>
+    <template id="portal_my_home_travels_booking">
+        <t t-call="portal.portal_layout">
+                        <t t-set="breadcrumbs_searchbar" t-value="True"/>
+
+            <t t-call="portal.portal_searchbar">
+                <t t-set="title">Bookings</t>
+            </t>
+            <t t-if="booking" t-call="portal.portal_table">
+                <thead>
+                    <tr class="active">
+                        <th class="text-end"> Booking Date </th>
+                        <th class="text-end"> Travel Date </th>
+                        <th class="text-end"> Number of Passengers </th>
+                        <th class="text-end"> Source Location </th>
+                        <th class="text-end"> Service </th>
+                    </tr>
+                </thead>
+
+                <t t-foreach="booking" t-as="booking">
+                    <tr>
+                        <!--                        <td><a t-att-href="quotation.get_portal_url()"><t t-out="quotation.name"/></a></td>-->
+                        <td class="text-end">
+                            <span t-field="booking.booking_date"/>
+                        </td>
+                        <td class="text-end">
+                            <span t-field="booking.travel_date"/>
+                        </td>
+                        <td class="text-end">
+                            <span t-field="booking.number_of_passengers"/>
+                        </td>
+                        <td class="text-end">
+                            <span t-field="booking.source_location_id"/>
+                        </td>
+                        <td class="text-end">
+                            <span t-field="booking.service_id"/>
+                        </td>
+<!--                       /-->
+                        <!--                        <td class="text-center">-->
+                        <!--                            <span t-if="booking.state == 'cancel'" class="badge rounded-pill text-bg-secondary">-->
+                        <!--                                <i class="fa fa-fw fa-remove"/> Cancelled</span>-->
+                        <!--                            <span t-if="booking.is_expired" class="badge rounded-pill text-bg-secondary">-->
+                        <!--                                <i class="fa fa-fw fa-clock-o"/> Expired</span>-->
+                        <!--                        </td>-->
+                        <td class="text-end">
+<!--                            <span t-field="booking.amount_total"/>-->
+                        </td>
+                    </tr>
+                </t>
+            </t>
+        <p t-else="">There are currently no quotations for your account.</p>
+                </t>
+    </template>
+
+
+
+</odoo>

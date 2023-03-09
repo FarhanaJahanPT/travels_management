@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="service_data_properties" model="service.service">
+            <field name="name">Tour Packages</field>
+            <field name="expiration_period">10</field>
+            <field name="is_tour_package">True</field>
+<!--            <field name="image" file="/travel_management/static/src/img/snippets/tour66.jpg"/>-->
+        </record>
+
+    <record id="service_data_properties_flight" model="service.service">
+            <field name="name">Flight</field>
+            <field name="expiration_period">20</field>
+<!--            <field name="image" file="/travel_management/static/src/img/snippets/tourr44.jpg"/>-->
+
+    </record>
+    <record id="service_data_properties_train" model="service.service">
+            <field name="name">Train</field>
+            <field name="expiration_period">30</field>
+<!--            <field name="image" file="/travel_management/static/src/img/snippets/train.jpg"/>-->
+
+    </record>
+    <record id="service_data_properties_van" model="service.service">
+            <field name="name">Van</field>
+            <field name="expiration_period">50</field>
+<!--            <field name="image" file="/travel_management/static/src/img/snippets/van.jpg"/>-->
+
+
+        </record>
+
+
+        <record id="facilities_tv_data_properties" model="facilities">
+            <field name="name">TV</field>
+        </record>
+        <record id="facilities_ac_data_properties" model="facilities">
+            <field name="name">AC</field>
+        </record>
+        <record id="facilities_sound_data_properties" model="facilities">
+            <field name="name">Sound System</field>
+        </record>
+        <record id="facilities_laser_data_properties" model="facilities">
+            <field name="name">Laser Beam</field>
+        </record>
+
+
+
+
+    </data>
+</odoo>

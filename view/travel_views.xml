@@ -1,0 +1,308 @@
+<odoo>
+    <data>
+        <record id="travel_management_action" model="ir.actions.act_window">
+            <field name="name">Booking</field>
+            <field name="res_model">booking.booking</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{"search_default_state_state":1}</field>
+        </record>
+
+        <record id="tour_package_action" model="ir.actions.act_window">
+            <field name="name">Tour Package</field>
+            <field name="res_model">tour.package</field>
+            <field name="view_mode">tree,form,calendar</field>
+        </record>
+
+
+
+        <record id="location_properties" model="ir.actions.act_window">
+            <field name="name">Location</field>
+            <field name="res_model">location.location</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <record id="service_properties" model="ir.actions.act_window">
+            <field name="name">Service Type</field>
+            <field name="res_model">service.service</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="vehicle_properties" model="ir.actions.act_window">
+            <field name="name">Vehicles</field>
+            <field name="res_model">vehicle.vehicle</field>
+            <field name="view_mode">tree,form,calendar</field>
+        </record>
+
+        <record id="facilities_properties" model="ir.actions.act_window">
+            <field name="name">Facilities</field>
+            <field name="res_model">facilities</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="travel_management_view_tree" model="ir.ui.view">
+            <field name="name">travel.management.tree</field>
+            <field name="model">booking.booking</field>
+
+            <field name="arch" type="xml">
+                <tree string="Document Type" default_order="booking_date">
+                    <field name="booking_reference"/>
+                    <field name="customer_id"/>
+                    <field name="service_id"/>
+                    <field name='state'/>
+                    <field name='source_location_id'/>
+                    <field name='destination_location_id'/>
+                    <field name='booking_date'/>
+                    <field name='expiration_date'/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="service_properties_view_tree" model="ir.ui.view">
+            <field name="name">travel.management.tree</field>
+            <field name="model">service.service</field>
+
+            <field name="arch" type="xml">
+                <tree string="Document Type">
+                    <field name="name"/>
+                    <field name="expiration_period"/>
+
+
+                </tree>
+            </field>
+        </record>
+
+        <record id="service_properties_view_tree" model="ir.ui.view">
+            <field name="name">travel.management.tree</field>
+            <field name="model">vehicle.vehicle</field>
+
+            <field name="arch" type="xml">
+                <tree string="Document Type">
+                    <field name="registration_no"/>
+                    <field name="vehicle_type"/>
+                    <field name="number_of_seat"/>
+
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="_form_view">
+            <field name="name">service.service.form</field>
+            <field name="model">service.service</field>
+            <field name="arch" type="xml">
+                <form string="Service Type">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="expiration_period"/>
+                                <field name="is_tour_package"/>
+                                <field name="image"/>
+
+                            </group>
+                        </group>
+                    </sheet>
+
+                </form>
+            </field>
+        </record>
+
+
+
+
+        <record model="ir.ui.view" id="travel_management_form_view">
+            <field name="name">travel.management.form</field>
+            <field name="model">booking.booking</field>
+            <field name="arch" type="xml">
+                <form string="Booking">
+                    <header>
+                        <button name="button_in_conform" states="Draft" string="Confirm" type="object"
+                                help="Move Booking to Confirmed"/>
+                        <button name="button_create_invoice" type="object" string="Create Invoice"
+                                attrs="{'invisible': [('state', '!=', 'Done')]}" />
+                        <field name="state" widget="statusbar" statusbar_visible="Draft,Confirmed,Expired"/>
+                    </header>
+                    <sheet>
+                        <h1>
+                            <field name="booking_reference"/>
+                        </h1>
+                        <group>
+                            <group>
+                                <field name="customer_id"/>
+                                <field name="number_of_passengers"/>
+                                <field name="travel_date"/>
+                                <field name="expiration_date" attrs="{'invisible':[('state', '!=', 'Draft')]}"
+                                       force_save="1"/>
+                                <field name="currency_id"/>
+
+                            </group>
+                            <group>
+                                <field name="service_id" options="{'no_create': True, 'no_edit': True}"  compute="_compute_is_visible" />
+                                <field name="period" force_save="1" invisible="1"/>
+                                <field name="booking_date"/>
+                                <field name="source_location_id"/>
+                                <field name="destination_location_id"/>
+                                <field name="is_tour_package" invisible="1" />
+                                <field name="charges" attrs="{'invisible': [('is_tour_package','!=',False)]}" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                            </group>
+                               <notebook>
+                                <page string="Estimation Amount"     attrs="{'invisible': [('is_tour_package','=',False)]}">
+                                    <field name="estimation_amount_ids">
+
+                                        <tree editable="bottom" footer="calculate_total_amount:total_amount">
+                                            <field name="service"/>
+                                            <field name="quantity"/>
+                                            <field name="amount"/>
+                                            <field name="subtotal"/>
+                                        </tree>
+                                    </field>
+
+                                    <field class="oe_subtotal_footer oe_right" name="total_amount" sum="Total Amount" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                                    <label for="total_amount" class="oe_subtotal_footer oe_right" />
+
+
+                                </page>
+
+                            </notebook>
+
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"/>
+                        <field name="message_ids"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="travel_management_location_tree" model="ir.ui.view">
+            <field name="name">travel.management.tree</field>
+            <field name="model">location.location</field>
+            <field name="arch" type="xml">
+                <tree string="Document Type">
+                    <field name="address"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="travel_management_search" model="ir.ui.view">
+            <field name="name">travel.management.search</field>
+            <field name="model">booking.booking</field>
+
+            <field name="arch" type="xml">
+                <search>
+                    <field name="customer_id"/>
+                    <field name="booking_reference"/>
+                    <field name="state"/>
+                    <field name="service_id" />
+                    <field name="travel_date"/>
+
+
+                    <filter string="Confirmed" name="state_confirmed" domain="[('state', '=', 'Done')]"/>
+                    <filter string="Draft" name="state_draft" domain="[('state', '=', 'Draft')]"/>
+                    <filter string="State" name="state_state" domain="[('state', 'in', ['Done', 'Draft'])]"/>
+                    <filter string="Bus" name="service_id" domain="[('service_id', '=', 'Bus')]"/>
+                    <filter string="Train" name="service_id" domain="[('service_id', '=', 'Train')]"/>
+                    <filter string="Flight" name="service_id" domain="[('service_id', '=', 'Flight')]"/>
+
+                    <group expand="1" string="Group By">
+                        <filter string="Travel date" name="travel_date" context="{'group_by': 'travel_date'}"/>
+                        <filter string="Destination location" name="destination_location_id"
+                                context="{'group_by': 'destination_location_id'}"/>
+                        <filter string="Service" name="service_id" context="{'group_by': 'service_id'}"/>
+                    </group>
+
+
+                </search>
+            </field>
+        </record>
+
+        <record id="seq_booking_patient" model="ir.sequence">
+            <field name="name">Booking Sequence</field>
+            <field name="code">booking.booking</field>
+            <field name="prefix">TM</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+
+        <record model="ir.ui.view" id="_form_view">
+            <field name="name">vehicle.vehicle.form</field>
+            <field name="model">vehicle.vehicle</field>
+            <field name="arch" type="xml">
+                <form string="Vehicles">
+                    <sheet>
+                        <group>
+
+
+                            <group>
+                                <field name="vehicle_name" force_save="1" />
+                                <field name="registration_no"/>
+                                <field name="vehicle_type"/>
+
+
+                            </group>
+
+                            <group>
+                                <field name="number_of_seat"/>
+                                <field name="facilities_ids" widget="many2many_tags" model="facilities"/>
+
+
+                            </group>
+
+                            <notebook>
+
+                                <page string="Vehicle Charges">
+                                    <field name="vehicle_charges_ids">
+                                        <tree editable="bottom">
+                                            <field name="service"/>
+                                            <field name="quantity"/>
+                                            <field name="unit"/>
+                                            <field name="amount"/>
+                                        </tree>
+                                        <form>
+                                            <group>
+                                                <field name="service"/>
+                                                <field name="quantity"/>
+                                            </group>
+                                            <group>
+                                                <field name="unit"/>
+                                                <field name="amount"/>
+                                            </group>
+
+                                        </form>
+                                    </field>
+                                </page>
+
+                            </notebook>
+                        </group>
+                    </sheet>
+
+                </form>
+            </field>
+        </record>
+
+
+        <record id="vehicle_properties_calendar" model="ir.ui.view">
+            <field name="name">vehicle.vehicle.calendar</field>
+            <field name="model">vehicle.vehicle</field>
+            <field name="arch" type="xml">
+            <calendar
+                    mode="month"
+                    date_start="start_date"
+                    color="facilities_ids">
+                <field name="vehicle_name"/>
+            </calendar>
+
+            </field>
+        </record>
+
+
+
+
+
+
+
+
+
+    </data>
+</odoo>

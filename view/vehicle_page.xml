@@ -1,0 +1,16 @@
+      <odoo>
+          <data>
+                <record id="vehicle_charge_view_tree" model="ir.ui.view">
+                        <field name="name">charges.tree</field>
+                        <field name="model">charges</field>
+                        <field name="arch" type="xml">
+                            <tree string="Document Type" >
+                                    <field name="service"/>
+                                    <field name="quantity"/>
+                                    <field name="unit" force_save="1"/>
+                                    <field name="amount"/>
+                            </tree>
+                        </field>
+                  </record>
+          </data>
+      </odoo>

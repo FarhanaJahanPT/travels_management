@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+    <record id="action_report_travel" model="ir.actions.report">
+        <field name="name">Travel Management Reporting</field>
+        <field name="model">travels.reporting</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">travel_management.report_travel_management_template</field>
+        <field name="report_file">travel_management.report_travel_management_template</field>
+
+        <field name="binding_model_id" ref="model_travels_reporting"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="report_travel_management_template">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <div>
+                        <center style="font-size:48px">
+                            <b>Travel Management Reporting</b>
+                        </center>
+                    </div>
+                    <div style="height:50px">
+                    </div>
+                    <div>
+
+                        <t t-if="partner_id">
+                            <strong>Customer :
+                                <t t-esc="partner_id"/>
+                            </strong>
+                        </t>
+                    </div>
+                    <div style="height:20px">
+                    </div>
+                    <div>
+                        <t t-if="from_date">
+                            <strong>Date From :
+                                <t t-esc="from_date"/>
+                            </strong>
+                        </t>
+                    </div>
+                    <div style="height:20px">
+                    </div>
+                    <div>
+                        <t t-if="to_date">
+                            <strong>Date To :
+                                <t t-esc="to_date"/>
+                            </strong>
+                        </t>
+                    </div>
+                    <div style="height:60px">
+                    </div>
+                    <div>
+                        <table class="table table-bordered mt32">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">
+                                        <span>Sl. No</span>
+                                    </th>
+                                    <th class="text-center">
+                                        <span>Reference Number</span>
+                                    </th>
+                                    <th class="text-center">
+                                        <span>Source Location</span>
+                                    </th>
+                                    <th class="text-center">
+                                        <span>Destination Location</span>
+                                    </th>
+                                    <th class="text-center">
+                                        <span>Vehicle Name</span>
+                                    </th>
+                                    <th class="text-center">
+                                        <span>State</span>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                <t t-foreach="sql_dict" t-as="det">
+
+                                    <tr style="border:solid grey 4px">
+                                        <td>
+                                            <span t-esc="det['sl_no']"/>
+                                        </td>
+                                        <td>
+                                            <span t-esc="det['booking_reference']"/>
+                                        </td>
+
+                                        <td>
+                                            <span t-esc="det['source_location']"/>
+                                        </td>
+
+                                        <td>
+                                            <span t-esc="det['destination_location']"/>
+                                        </td>
+
+                                        <td>
+                                            <span t-esc="det['name']"/>
+                                        </td>
+                                        <td>
+                                            <span t-esc="det['state']"/>
+                                        </td>
+
+                                    </tr>
+
+                                </t>
+
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+
+
+            </t>
+
+        </t>
+    </template>
+
+
+</odoo>

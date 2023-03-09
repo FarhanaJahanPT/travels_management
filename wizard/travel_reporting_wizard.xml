@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<odoo>
+
+
+        <record id="travel_wizard_view_form" model="ir.ui.view">
+            <field name="name">travels.reporting.form</field>
+            <field name="model">travels.reporting</field>
+            <field name="arch" type="xml">
+                <form string="Travel Management Reporting">
+                    <group>
+                        <field name="customer_id" />
+                        <field name="date_from" />
+                        <field name="date_to" />
+                    </group>
+
+                    <footer>
+                        <button name="travel_print_report" string="Print" type="object"/>
+                        <button name="travel_print_xlsx" string="XLSX" type="object"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="travel_reporting_action" model="ir.actions.act_window">
+            <field name="name">Travel Management Reporting</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">travels.reporting</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+</odoo>

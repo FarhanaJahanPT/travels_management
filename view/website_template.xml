@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="website_page_booking" name="Travels Booking">
+        <t t-call="website.layout">
+            <div id="wrap" class="oe_structure oe_empty">
+               <section class="s_website_form" data-vcss="001" data-snippet="s_website_form">
+                <div class="container">
+                    <div class="form-group">
+                         <div style="height:20px">
+                    </div>
+                        <div>
+                            <h1 id="hhhh" align="center">Travels Booking</h1>
+                        </div>
+                         <div style="height:50px">
+                    </div>
+                       <form id="travel_booking" action="/booking/submit/" method="post" enctype="multipart/form-data" class="o_mark_required" data-mark="*" data-model_name="" data-success-page="">
+                            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                           <div class="s_website_form_rows row s_col_no_bgcolor">
+                               <div class="form-group col-12 s_website_form_field s_website_form_required" data-type="char" data-name="Field">
+                                   <div class="row s_col_no_resize s_col_no_bgcolor">
+                                       <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px" for="studio1">
+
+                                <span class="s_website_form_label_content">Name:</span>
+                                       <span class="s_website_form_mark"> *</span>
+                                       </label>
+                                       <div class="col-sm">
+
+                                <select id="customer_selection" name="customer_id" class="form-control link-style" >
+                                    <t t-foreach="customer_id" t-as="customers">
+<!--                                        <option t-esc="null" t-att-value="null" default="1"/>-->
+                                        <option t-esc="customers.name" t-att-value="customers.id" t-att-required="1"/>
+                                    </t>
+                                </select>
+                            </div>
+                                   </div>
+                               </div>
+                           </div>
+                            <div style="height:20px">
+                    </div>
+                            <div class="form-group">
+                                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                           <div class="s_website_form_rows row s_col_no_bgcolor">
+                               <div class="form-group col-12 s_website_form_field s_website_form_required" data-type="char" data-name="Field">
+                                   <div class="row s_col_no_resize s_col_no_bgcolor">
+                                       <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px" for="studio1">
+
+                                <span for="date">Travel Date:</span>
+                                       <span class="s_website_form_mark"> *</span>
+                                       </label>
+                                       <div class="col-sm">
+                                <input type="date" class="form-control" name="travel_date"
+                                 id="travel_date" required="1"/>
+                            </div>
+                                   </div>
+                               </div>
+                           </div>
+                            </div>
+                            <div style="height:20px">
+                    </div>
+                            <div class="form-group">
+                                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                           <div class="s_website_form_rows row s_col_no_bgcolor">
+                               <div class="form-group col-12 s_website_form_field s_website_form_required" data-type="char" data-name="Field">
+                                   <div class="row s_col_no_resize s_col_no_bgcolor">
+                                       <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px" for="studio1">
+
+                                <span for="source_location_id">Source Location:</span>
+                                       <span class="s_website_form_mark"> *</span>
+                                       </label>
+                                       <div class="col-sm">
+                                <select id="source_location_selection" name="source_location_id" class="form-control link-style">
+                                    <t t-foreach="source_location_id" t-as="source">
+<!--                                        <option t-esc="null" t-att-value="null" default="1"/>-->
+                                        <option t-esc="source.address" t-att-value="source.id" t-att-required="1"/>
+                                    </t>
+                                </select>
+                                       </div>
+                                   </div>
+                               </div>
+                           </div>
+                            </div>
+                            <div style="height:20px">
+                    </div>
+                           <div class="form-group">
+                                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                           <div class="s_website_form_rows row s_col_no_bgcolor">
+                               <div class="form-group col-12 s_website_form_field s_website_form_required" data-type="char" data-name="Field">
+                                   <div class="row s_col_no_resize s_col_no_bgcolor">
+                                       <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px" for="studio1">
+
+                                <span for="name">Destination Location:</span>
+                                       <span class="s_website_form_mark"> *</span>
+                                       </label>
+                                       <div class="col-sm">
+                                <select id="destination_location_selection" name="destination_location_id" class="form-control link-style">
+<!--                                    <t t-foreach="destination_location_id" t-as="destination">-->
+<!--                                        <option t-esc="null" t-att-value="null" default="1"/>-->
+<!--                                        <option t-esc="destination.address" t-att-value="destination.id"/>-->
+<!--                                    </t>-->
+                                </select>
+                                       </div>
+                                   </div>
+                               </div>
+                           </div>
+
+                            </div>
+                            <div style="height:20px">
+                    </div>
+                           <div class="form-group">
+                            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                           <div class="s_website_form_rows row s_col_no_bgcolor">
+                               <div class="form-group col-12 s_website_form_field s_website_form_required" data-type="char" data-name="Field">
+                                   <div class="row s_col_no_resize s_col_no_bgcolor">
+                                       <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px" for="studio1">
+
+                                <span for="number">Number Of Travellers:</span>
+                               <span class="s_website_form_mark"> *</span>
+                                       </label>
+
+
+                           <div class="col-sm">
+                                <input type="number" class="form-control" name="number_of_passengers"
+                                id="number_of_passengers" />
+                            </div>
+                           </div>
+                               </div>
+                           </div>
+                           </div>
+                            <div style="height:20px">
+                    </div>
+                           <div class="form-group">
+                               <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                           <div class="s_website_form_rows row s_col_no_bgcolor">
+                               <div class="form-group col-12 s_website_form_field s_website_form_required" data-type="char" data-name="Field">
+                                   <div class="row s_col_no_resize s_col_no_bgcolor">
+                                       <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px" for="studio1">
+
+                                <span for="service_id">Service:</span>
+                               <span class="s_website_form_mark"> *</span>
+                                       </label>
+                           <div class="col-sm">
+                                <select name="service_id" class="form-control link-style" >
+                                    <t t-foreach="service_id" t-as="service">
+<!--                                        <option t-esc="null" t-att-value="null" default="1"/>-->
+                                        <option t-esc="service.name" t-att-value="service.id"/>
+                                    </t>
+                                </select>
+                            </div>
+                           </div>
+                               </div>
+                           </div>
+                           </div>
+
+                            <div style="height:50px">
+                    </div>
+
+                            <div class="form-group col-12 s_website_form_submit" data-name="Submit Button" align="right">
+                            <div style="margin-bottom:10px;" class="s_website_form_label"/>
+                                <button type="submit" class="btn btn-primary btn_submit" >Submit</button>
+                                <a t-attf-href="/new/account"
+                                   name="create">New User</a>
+                            </div>
+<!--                           <div class="form-group col-12 s_website_form_submit" data-name="Submit Button" align="right">-->
+<!--                            <div style="margin-bottom:10px;" class="s_website_form_label"/>-->
+<!--                                <button type="object" class="btn btn-primary btn_submit" >New User</button>-->
+<!--&lt;!&ndash;                            </div>&ndash;&gt;-->
+<!--                            <div style="height:20px">-->
+<!--                    </div>-->
+
+
+                        </form>
+
+
+                    </div>
+                </div>
+               </section>
+              </div>
+          </t>
+    </template>
+
+<!--    <template id="website_page_booking" name="Travels Booking">-->
+<!--        <t t-call="website.layout">-->
+<!--            <div id="wrap" class="oe_structure oe_empty">-->
+<!--               <section class="s_website_form" data-vcss="001" data-snippet="s_website_form">-->
+<!--                <div class="container">-->
+<!--                    <div class="form-group">-->
+<!--                         <div style="height:20px">-->
+<!--                    </div>-->
+<!--                        <div>-->
+<!--                            <h1 id="hhhh" align="center">Travels Booking</h1>-->
+<!--                        </div>-->
+<!--                         <div style="height:50px">-->
+<!--                    </div>-->
+<!--                         <form id="travel_booking" action="/new/account/submit" method="post" enctype="multipart/form-data" class="o_mark_required" data-mark="*" data-model_name="" data-success-page="">-->
+<!--&lt;!&ndash;                                 <div class="form-group col-12 s_website_form_submit" data-name="Submit Button" align="right">&ndash;&gt;-->
+<!--                            <div style="margin-bottom:10px;" class="s_website_form_label"/>-->
+<!--                                <button type="submit" class="btn btn-primary btn_submit" >New User</button>-->
+<!--&lt;!&ndash;                            </div>&ndash;&gt;-->
+<!--                         </form>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--               </section>-->
+<!--            </div>-->
+<!--        </t>-->
+<!--    </template>-->
+
+
+    <template id="website_create_account_menu" name="Travels Booking">
+             <t t-call="website.layout">
+            <div id="wrap" class="oe_structure oe_empty">
+               <section class="s_website_form" data-vcss="001" data-snippet="s_website_form">
+                <div class="container">
+                    <div class="form-group">
+                         <div style="height:20px">
+                    </div>
+                        <div>
+                            <h1 id="hhhh" align="center">Create Account</h1>
+                        </div>
+                        <div style="height:50px">
+                    </div>
+                       <form id="travel_booking" action="/new/account/submit" method="post" enctype="multipart/form-data" class="o_mark_required" data-mark="*" data-model_name="" data-success-page="">
+                            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                           <div class="s_website_form_rows row s_col_no_bgcolor">
+                               <div class="form-group col-12 s_website_form_field s_website_form_required" data-type="char" data-name="Field">
+                                   <div class="row s_col_no_resize s_col_no_bgcolor">
+                                       <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px" for="studio1">
+
+                                <span class="s_website_form_label_content">Name:</span>
+                                       <span class="s_website_form_mark"> *</span>
+                                       </label>
+                                       <div class="col-sm">
+
+                                <input type="text" class="form-control" name="customer_id"
+                                id="customer_id" required="1"/>
+                            </div>
+                                   </div>
+                               </div>
+                           </div>
+                           <div style="height:20px">
+                    </div>
+                           <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                           <div class="s_website_form_rows row s_col_no_bgcolor">
+                               <div class="form-group col-12 s_website_form_field s_website_form_required" data-type="char" data-name="Field">
+                                   <div class="row s_col_no_resize s_col_no_bgcolor">
+                                       <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px" for="studio1">
+
+                                <span class="s_website_form_label_content">Phone:</span>
+                                       <span class="s_website_form_mark"> *</span>
+                                       </label>
+                                       <div class="col-sm">
+
+                                <input type="number" class="form-control" name="phone"
+                                id="phone" required="1"/>
+                            </div>
+                                   </div>
+                               </div>
+                           </div>
+                           <div style="height:20px">
+                    </div>
+                           <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                           <div class="s_website_form_rows row s_col_no_bgcolor">
+                               <div class="form-group col-12 s_website_form_field s_website_form_required" data-type="char" data-name="Field">
+                                   <div class="row s_col_no_resize s_col_no_bgcolor">
+                                       <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px" for="studio1">
+
+                                <span class="s_website_form_label_content">Email:</span>
+                                       <span class="s_website_form_mark"> *</span>
+                                       </label>
+                                       <div class="col-sm">
+
+                                <input type="email" class="form-control" name="email"
+                                id="email" required="1"/>
+                            </div>
+                                   </div>
+                               </div>
+                           </div>
+                           <div style="height:20px">
+                    </div>
+
+                           <div class="form-group col-12 s_website_form_submit" data-name="Submit Button" align="right">
+                            <div style="margin-bottom:10px;" class="s_website_form_label"/>
+                                <button type="submit" class="btn btn-primary btn_submit" >Submit</button>
+                           </div>
+                       </form>
+                    </div>
+                </div>
+               </section>
+            </div>
+             </t>
+    </template>
+</odoo>
